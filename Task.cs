@@ -77,5 +77,37 @@ namespace CollectionsStringsFiless
 			}
 			return dictonary;
 		}
+
+		/*
+		Вчера Вася узнал про удивительный закон Бенфорда и хочет проверить его действие. 
+		Для этого он взял текст с актуальными данными по самым высоким зданиям в мире и хочет получить статистику: 
+		сколько раз каждая цифра стоит на месте старшего разряда в числах из его текста.
+
+		Метод GetBenfordStatistics должен вернуть массив чисел, в котором на i-ой позиции находится статистика для цифры i.
+		 */
+
+		public static int[] GetBenfordStatistics(string text)
+		{
+			var statistics = new int[10];
+			for (int i = 0; i < text.Length; i++)
+			{
+				if (char.IsDigit(text[i]) && (i == 0) || !char.IsDigit(text[i - 1]))
+				{
+					var index = text[i] - '0';
+					statistics[index]++;
+				}
+			}
+
+			return statistics;
+
+		}
+
+		public static string ReplaceIncorrectSeparators(string text)
+		{
+
+			string[] separationString = { " ", ":", ": ", ";", ",", "-", " - ", "\t" };
+			var splitText = text.Split(separationString, StringSplitOptions.RemoveEmptyEntries);
+			return string.Join("\t", splitText);
+		}
 	}
 }
