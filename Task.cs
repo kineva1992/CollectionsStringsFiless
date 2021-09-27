@@ -109,5 +109,26 @@ namespace CollectionsStringsFiless
 			var splitText = text.Split(separationString, StringSplitOptions.RemoveEmptyEntries);
 			return string.Join("\t", splitText);
 		}
+
+		private static string ApplyCommands(string[] commands)
+		{
+			var strBilder = new StringBuilder();
+			string keyPush = "push";
+			string keyPop = "pop";
+
+            foreach (var item in commands)
+            {
+				string keyWords = item.Substring(0, item.IndexOf(' '));
+				string l = item.Remove(0, keyWords.Length + 1);
+				if (keyWords == keyPush)
+					strBilder.Append(l);
+				else if (keyWords == keyPop)
+				{ 
+					int c = int.Parse(l);
+					strBilder.Remove(strBilder.Length - c, c);
+				}
+			}
+			return strBilder.ToString();
+		}
 	}
 }
