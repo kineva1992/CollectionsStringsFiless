@@ -24,14 +24,16 @@ namespace TextAnalysis
         private static List<List<string>> GetSentencesWords(string[] sentences)
         {
             List<List<string>> result = new List<List<string>>();
+            StringBuilder word = new StringBuilder();
+            List<string> words = new List<string>();
+
             foreach (string sentence in sentences)
             {
                 if (sentence.Length == 0)
                 {
                     continue;
                 }
-                StringBuilder word = new StringBuilder();
-                List<string> words = new List<string>();
+                
                 foreach (char c in sentence)
                 {
                     if (char.IsLetter(c) || c == '\'')
